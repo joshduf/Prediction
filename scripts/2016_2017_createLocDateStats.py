@@ -5,6 +5,7 @@ from collections import defaultdict
 import csv
 import pickle
 import processData
+import sys
 
 def getStats(entryExit_dict, pred_value = 0.5):
     HT_INDEX = 2
@@ -130,9 +131,14 @@ def saveStats(stats_dict, PATH):
 
             writer.writerow(outline)
             
+if len(sys.argv) == 2:
+    pred_value = float(sys.argv[1])
+else:
+    pred_value = 0.5
+
 entryExit_dict = processData.getDedupe(PATH = "../pickles/2016_2017_entryExit.pickle")
 
-stats_dict_ht, stats_dict_ht_all = getStats(entryExit_dict)
+stats_dict_ht, stats_dict_ht_all = getStats(entryExit_dict, pred_value = pred_value)
 
 saveStats(stats_dict_ht, PATH = "../csvs/2016_2017_locDate_stats_ht.csv")
 saveStats(stats_dict_ht_all, PATH = "../csvs/2016_2017_locDate_stats_ht_all.csv")

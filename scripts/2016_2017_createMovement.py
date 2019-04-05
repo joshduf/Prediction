@@ -4,6 +4,7 @@
 from collections import defaultdict
 import csv
 import pickle
+import sys
 
 def getMovement(pred_value = 0.5):
     ID_INDEX = 0
@@ -93,7 +94,12 @@ def saveMovement(move_dict, SAVE):
     with open(SAVE, 'wb') as savefile:
         pickle.dump(move_dict, savefile, pickle.HIGHEST_PROTOCOL)
 
-move_dict, move_dict_ht, move_dict_ht_all, entryExit_dict, entryExit_dict_ht, entryExit_dict_ht_all = getMovement(pred_value = 0.5)
+if len(sys.argv) == 2:
+    pred_value = float(sys.argv[1])
+else:
+    pred_value = 0.5
+
+move_dict, move_dict_ht, move_dict_ht_all, entryExit_dict, entryExit_dict_ht, entryExit_dict_ht_all = getMovement(pred_value = pred_value)
 
 saveMovement(move_dict, SAVE = "../pickles/2016_2017_movement.pickle")
 saveMovement(move_dict_ht, SAVE = "../pickles/2016_2017_movement_ht.pickle")
