@@ -3,6 +3,7 @@
 
 from collections import defaultdict
 import csv
+import numpy as np
 import pickle
 import sys
 
@@ -97,7 +98,7 @@ def saveMovement(move_dict, SAVE):
 if len(sys.argv) == 2:
     pred_value = float(sys.argv[1])
 else:
-    pred_value = 0.5
+    pred_value = float(np.load("../model/2016_2017_model_cutoff.npy"))
 
 move_dict, move_dict_ht, move_dict_ht_all, entryExit_dict, entryExit_dict_ht, entryExit_dict_ht_all = getMovement(pred_value = pred_value)
 

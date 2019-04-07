@@ -379,9 +379,10 @@ def getConfusion(y_test, y_pred, val = 0.5):
     
     precision = tp/(tp + fp)
     recall = tp/(tp + fn)
-    f1 = (precision*recall)/(precision + recall)
+    accuracy = (tp + tn)/(tp + tn + fp + fn)
+    f1 = 2*(precision*recall)/(precision + recall)
 
-    return cm, precision, recall, f1
+    return cm, precision, recall, accuracy, f1
 
 # Given history from model, plots accuracy
 def getPlot(history, save_name = '../model/accuracy.png'):
